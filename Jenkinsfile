@@ -12,3 +12,4 @@ git: 'https://github.com/murari99732/MyFirstProjectOnGit'
    }
    
    }
+! This jenkins file will not work as Jenkins pipeline automation like checkout building testing deployment and triggering the push will not work  for localhost.
