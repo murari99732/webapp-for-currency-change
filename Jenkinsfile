@@ -4,8 +4,10 @@ node {
 git: 'https://github.com/murari99732/MyFirstProjectOnGit'
    }
    
-     stage('Compile-Package' ){
-	  sh 'mvn package'
+ stage('Mvn Package'){
+	
+	   
+	   sh "${mvn} clean package deploy"
    }
    
    }
