@@ -2,9 +2,19 @@ package myfirstproject.exchangeservice;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class ExchangeValue {
+	@Id
 	Long id;
+	
+	@Column(name="currency_from")
 	String from;
+	
+	@Column(name="currency_to")
 	String to;
 	BigDecimal conversionMultiple;
 	int port;
