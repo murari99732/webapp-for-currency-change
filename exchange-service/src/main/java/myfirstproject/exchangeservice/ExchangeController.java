@@ -14,12 +14,17 @@ public class ExchangeController {
 	@Autowired
 	Environment environment;
 	
+	@Autowired
+	ExchangeRepository exchangeRepository;
+	
 	@GetMapping("/exchange/from/{from}/to/{to}")
 	ExchangeValue retrieveValue(@PathVariable String from,@PathVariable String to)
 	{
-		ExchangeValue exchangeValue= new ExchangeValue(1000L,from, to, BigDecimal.valueOf(65));
+	
 	//	exchangeValue.setPort(Integer.parseInt(environment.getProperty("local.server.port")));
 	//	environment.getProperty("local.server.port");
+		
+		ExchangeValue exchangeValue= exchangeRepository.findByFromAndTo(from, to);
 		String d=environment.getProperty("local.server.port");
 		System.out.println(d);
 		
