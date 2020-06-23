@@ -38,7 +38,12 @@
         <version>1.4.193</version>
 </dependency>
 		<!-- https://mvnrepository.com/artifact/org.apache.activemq/activemq-all -->
-
+<dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+  
+        </dependency>
+     
 		
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
