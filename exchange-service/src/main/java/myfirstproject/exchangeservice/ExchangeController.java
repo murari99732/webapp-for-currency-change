@@ -21,8 +21,6 @@ public class ExchangeController {
 	ExchangeValue retrieveValue(@PathVariable String from,@PathVariable String to)
 	{
 	
-	//	exchangeValue.setPort(Integer.parseInt(environment.getProperty("local.server.port")));
-	//	environment.getProperty("local.server.port");
 		
 		ExchangeValue exchangeValue= exchangeRepository.findByFromAndTo(from, to);
 		String d=environment.getProperty("local.server.port");
@@ -30,5 +28,15 @@ public class ExchangeController {
 		
 				return exchangeValue;
 	}
+	
+	@GetMapping("/exchange-from-web/from/{from}/to/{to}")
+	ExchangeValue retrieveValueFromWeb(@PathVariable String from,@PathVariable String to) throws Exception
+	{
+		BigDecimal response=JsonToJava.convert_json_to_java(from, to);
+		ExchangeValue exchangeValue= exchangeRepository.findByFromAndTo(from, to);
+		exchangeValue.setConversionMultiple(response);
+		return exchangeValue;
+	}
+	
 
 }
