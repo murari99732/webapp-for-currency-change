@@ -26,7 +26,7 @@ public class ExchangeController {
 		
 		ExchangeValue exchangeValue= exchangeRepository.findByFromAndTo(from, to);
 		String d=environment.getProperty("local.server.port");
-		System.out.println(d);
+
 		
 				return exchangeValue;
 	}

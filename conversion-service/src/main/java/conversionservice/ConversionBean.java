@@ -2,6 +2,9 @@ package conversionservice;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
 public class ConversionBean {
 	Long id;
 	String from;
@@ -10,6 +13,7 @@ public class ConversionBean {
 	BigDecimal quantity;
 	BigDecimal totalCalAmount;
 	int port;
+	
 	public ConversionBean()
 	{
 		
