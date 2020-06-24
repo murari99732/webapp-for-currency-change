@@ -52,4 +52,16 @@ public	CurrencyConversion getValue(@PathVariable String from, @PathVariable Stri
 				quantity.multiply(response.getConversionMultiple()));
 	}
 
+	@GetMapping("/currency-feign-web/from/{from}/to/{to}/quantity/{quantity}")
+	public CurrencyConversion convertCurrencyWebFeign(@PathVariable String from, @PathVariable String to,
+			@PathVariable BigDecimal quantity) {
+
+		CurrencyConversion response = proxy.retrieveValueFromWeb(from, to);
+
+		
+		return new CurrencyConversion(response.getId(), from, to, response.getConversionMultiple(), quantity,
+				quantity.multiply(response.getConversionMultiple()));
+	}
+	
+	
 }
