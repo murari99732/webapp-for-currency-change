@@ -2,9 +2,18 @@ package conversionservice;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+@Entity
+@Table(name="Currency_Conversion")
 public class CurrencyConversion {
+	@Id
 	private Long id;
+	@Column(name="conv_from")
 	private String from;
+	@Column(name="conv_to")
 	private String to;
 	private BigDecimal conversionMultiple;
 	private BigDecimal quantity;

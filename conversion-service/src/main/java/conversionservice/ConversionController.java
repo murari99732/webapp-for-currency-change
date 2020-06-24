@@ -17,6 +17,9 @@ public class ConversionController {
 	@Autowired
 	private Proxy proxy;
 	
+	@Autowired
+	ConversionRepository conversionRepository;
+	
 	@GetMapping("/conversion/from/{from)/to/{to}/quantity/{quantity}")
 public	CurrencyConversion getValue(@PathVariable String from, @PathVariable String to, @PathVariable BigDecimal quantity)
 	{
@@ -57,11 +60,27 @@ public	CurrencyConversion getValue(@PathVariable String from, @PathVariable Stri
 			@PathVariable BigDecimal quantity) {
 
 		CurrencyConversion response = proxy.retrieveValueFromWeb(from, to);
-
-		
-		return new CurrencyConversion(response.getId(), from, to, response.getConversionMultiple(), quantity,
+	CurrencyConversion currencyConversion=	new CurrencyConversion(response.getId(), from, to, response.getConversionMultiple(), quantity,
 				quantity.multiply(response.getConversionMultiple()));
+		
+	CurrencyConversion responseSave= new CurrencyConversion();
+	responseSave.setId(response.getId());
+	responseSave.setFrom(from);
+	responseSave.setTo(to);
+	responseSave.setConversionMultiple(response.getConversionMultiple());
+	responseSave.setQuantity(quantity);
+	responseSave.setTotalCalculatedAmount(quantity.multiply(response.getConversionMultiple()));
+	if(conversionRepository.findById(responseSave.getId()) != null)
+	{
+	conversionRepository.save(responseSave);
+	}
+		return currencyConversion;
 	}
 	
+	@GetMapping("/currency-feign-web/amount")
+	public BigDecimal getAmmount()
+	{
+		return conversionRepository.selectTotals();
+	}
 	
 }
