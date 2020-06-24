@@ -28,5 +28,14 @@ public class ExchangeController {
 		
 				return exchangeValue;
 	}
+	
+	@GetMapping("/exchange-from-web/from/{from}/to/{to}")
+	BigDecimal retrieveValueFromWeb(@PathVariable String from,@PathVariable String to) throws Exception
+	{
+	
+		BigDecimal response=JsonToJava.convert_json_to_java(from, to);
+		return response;
+	}
+	
 
 }
