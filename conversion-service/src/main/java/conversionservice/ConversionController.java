@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -55,6 +56,7 @@ public	CurrencyConversion getValue(@PathVariable String from, @PathVariable Stri
 				quantity.multiply(response.getConversionMultiple()));
 	}
 
+	@Scheduled(cron = "${my.cron.expression}")
 	@GetMapping("/currency-feign-web/from/{from}/to/{to}/quantity/{quantity}")
 	public CurrencyConversion convertCurrencyWebFeign(@PathVariable String from, @PathVariable String to,
 			@PathVariable BigDecimal quantity) {
