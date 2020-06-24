@@ -21,8 +21,6 @@ public class ExchangeController {
 	ExchangeValue retrieveValue(@PathVariable String from,@PathVariable String to)
 	{
 	
-	//	exchangeValue.setPort(Integer.parseInt(environment.getProperty("local.server.port")));
-	//	environment.getProperty("local.server.port");
 		
 		ExchangeValue exchangeValue= exchangeRepository.findByFromAndTo(from, to);
 		String d=environment.getProperty("local.server.port");
