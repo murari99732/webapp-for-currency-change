@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,8 @@ public class ConversionController {
 	
 	@Autowired
 	ConversionRepository conversionRepository;
+	@Value("${server.port}")
+	private String serverPort;
 	
 	@GetMapping("/conversion/from/{from)/to/{to}/quantity/{quantity}")
 public	CurrencyConversion getValue(@PathVariable String from, @PathVariable String to, @PathVariable BigDecimal quantity)
@@ -72,6 +75,7 @@ public	CurrencyConversion getValue(@PathVariable String from, @PathVariable Stri
 	responseSave.setConversionMultiple(response.getConversionMultiple());
 	responseSave.setQuantity(quantity);
 	responseSave.setTotalCalculatedAmount(quantity.multiply(response.getConversionMultiple()));
+	responseSave.setPort(Integer.parseInt(serverPort));
 	if(conversionRepository.findById(responseSave.getId()) != null)
 	{
 	conversionRepository.save(responseSave);
