@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,6 +47,7 @@ public	CurrencyConversion getValue(@PathVariable String from, @PathVariable Stri
 	}
 	
 	@GetMapping("/currency-feign/from/{from}/to/{to}/quantity/{quantity}")
+	@Cacheable("Currency_Conversion")
 	public CurrencyConversion convertCurrencyFeign(@PathVariable String from, @PathVariable String to,
 			@PathVariable BigDecimal quantity) {
 
@@ -79,10 +81,5 @@ public	CurrencyConversion getValue(@PathVariable String from, @PathVariable Stri
 		return currencyConversion;
 	}
 	
-	@GetMapping("/currency-feign-web/amount")
-	public BigDecimal getAmmount()
-	{
-		return conversionRepository.selectTotals();
-	}
 	
 }
